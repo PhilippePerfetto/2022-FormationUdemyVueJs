@@ -1,8 +1,8 @@
 <template>
   <div>
     <MainNav> </MainNav>
-    <MainNav> </MainNav>
-    <MainNav> </MainNav>
+    <TutuEnSlip />
+    <main-nav />
   </div>
 </template>
 
