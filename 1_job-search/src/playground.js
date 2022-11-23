@@ -1,3 +1,13 @@
+export const evenOrOdd = (number) => {
+  if (number % 2 == 0) {
+    return "Even";
+  }
+  return "Odd";
+};
+
+export const multiply = (n1, n2) => n1 * n2;
+
+/*
 const fruits = ["Apple", "Banana", "Orange"];
 const vegetables = ["Cucumber", "Radish"];
 
@@ -17,3 +27,4 @@ const developer = {
 console.log(developer);
 developer.doubleSalary();
 console.log(developer);
+*/
