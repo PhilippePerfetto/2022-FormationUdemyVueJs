@@ -20,7 +20,7 @@
 
       <div class="flex items-center h-full ml-auto">
         <ProfileImage v-if="isLoggedIn" data-test="profile-image"></ProfileImage>
-        <ActionButton v-else data-test="login-button"></ActionButton>
+        <ActionButton v-else data-test="login-button" @click="loginUser"></ActionButton>
       </div>
     </div>
     <hr class="line" />
@@ -46,6 +46,12 @@ export default {
       menuItems: ["Teams", "Sites", "Life@", "WeHire", "Std", "Jobs"],
       isLoggedIn: false,
     };
+  },
+  methods: {
+    loginUser() {
+      this.isLoggedIn = !this.isLoggedIn;
+
+    }
   },
 };
 </script>

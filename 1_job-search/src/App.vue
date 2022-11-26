@@ -1,8 +1,6 @@
 <template>
   <div>
     <MainNav> </MainNav>
-    <TutuEnSlip />
-    <main-nav />
   </div>
 </template>
 

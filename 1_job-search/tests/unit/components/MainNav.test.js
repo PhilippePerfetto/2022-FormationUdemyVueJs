@@ -16,38 +16,32 @@ describe("MainNav", () => {
     expect(texts).toEqual(["Teams", "Sites", "Life@", "WeHire", "Std", "Jobs"]);
     console.log(texts);
   });
-
-  describe("When user is logged out", () => {
-    it("prompts user to sign in", () => {
-      const wrapper = mount(MainNav, {
-        data() {
-          return {
-            isLoggedIn: false,
-          }
-        }
-      });
-      const loginBtn = wrapper.find("[data-test='login-button']");
-      const profileImage = wrapper.find("[data-test='profile-image']");
-      expect(loginBtn.exists()).toBe(true);
-      expect(profileImage.exists()).toBe(false);
-    });
-  });
   
   describe("When user is logged in", () => {
     it("displays user profile", () => {
-      const wrapper = mount(MainNav, {
-        data() {
-          return {
-            isLoggedIn: true,
-          }
-        }
-      });
+      const wrapper = mount(MainNav);
       const loginBtn = wrapper.find("[data-test='login-button']");
-      const profileImage = wrapper.find("[data-test='profile-image']");
+      expect(loginBtn.exists()).toBe(true);
+    });
+  });
+
+  describe("When user is logged out", () => {
+    it("prompts user to sign in", async () => {
+      const wrapper = mount(MainNav);
+      let profileImage = wrapper.find("[data-test='profile-image']");
+      expect(profileImage.exists()).toBe(false);
+
+      let loginBtn = wrapper.find("[data-test='login-button']");
+      await loginBtn.trigger("click");
+
+      loginBtn = wrapper.find("[data-test='login-button']");
       expect(loginBtn.exists()).toBe(false);
+
+      profileImage = wrapper.find("[data-test='profile-image']");
       expect(profileImage.exists()).toBe(true);
     });
   });
+  
   
   // await wrapper.setData({ company: "Super Corp" }); // Test trop intrusif. Avec async devant les () =>
   /*
