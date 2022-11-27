@@ -24,6 +24,7 @@
       </div>
     </div>
     <hr class="line" />
+    <TheSubnav></TheSubnav>
   </div>
   <div class="flex w_full h-64 bg-gray-500"></div>
   <!--<div class="w_full border-b border-solid border-brand-gray-1">.</div>-->
@@ -33,12 +34,14 @@
 <script>
 import ActionButton from "@/components/ActionButton.vue";
 import ProfileImage from "@/components/ProfileImage.vue";
+import TheSubnav from "@/components/TheSubnav.vue";
 
 export default {
   name: "MainNav",
   components: {
     ActionButton,
     ProfileImage,
+    TheSubnav,
   },
   data() {
     return {
