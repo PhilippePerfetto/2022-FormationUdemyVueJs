@@ -14,7 +14,7 @@ describe("MainNav", () => {
     const texts = items.map((item) => item.text());
     expect(texts).toEqual(["Teams", "Sites", "Life@", "WeHire", "Std", "Jobs"]);
   });
-  
+
   describe("When user is logged in", () => {
     it("displays user profile", () => {
       const wrapper = mount(MainNav);
@@ -39,8 +39,7 @@ describe("MainNav", () => {
       expect(profileImage.exists()).toBe(true);
     });
   });
-  
-  
+
   // await wrapper.setData({ company: "Super Corp" }); // Test trop intrusif. Avec async devant les () =>
   /*
     const wrapper = mount(MainNav, {

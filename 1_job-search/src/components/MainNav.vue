@@ -25,9 +25,7 @@
     </div>
     <hr class="line" />
   </div>
-  <div class="flex w_full h-64 bg-gray-500">
-    
-  </div>
+  <div class="flex w_full h-64 bg-gray-500"></div>
   <!--<div class="w_full border-b border-solid border-brand-gray-1">.</div>-->
   <!--<div class="line">.</div>-->
 </template>
@@ -53,8 +51,7 @@ export default {
   methods: {
     loginUser() {
       this.isLoggedIn = !this.isLoggedIn;
-
-    }
+    },
   },
 };
 </script>
