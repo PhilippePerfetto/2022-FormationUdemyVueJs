@@ -5,17 +5,21 @@
 <script>
 export default {
   name: "ActionButton",
-  props: ["text", "isPrimary"],
-  data() {
-    return {
-      primary: this.isPrimary,
-    };
-  },
+  props: {
+        text: { type: String, required: true, },
+        type: { type: String, required: false, default: "primary", 
+        validator(value) {
+            return ["primary", "secondary", "terciary"].includes(value);
+          } 
+        },
+      },
   computed: {
     buttonClass() {
       return {
-        primary: this.primary,
-        secondary : !this.primary,
+        [this.type]: true,
+        /*primary: this.type === "primary",
+        secondary : this.type === "secondary",
+        terciary : this.type === "terciary",*/
       };
     },
   },
@@ -33,6 +37,9 @@ button {
 
 .secondary {
   @apply text-brand-blue-1 bg-transparent hover:bg-brand-blue-2;
+}
+.terciary {
+  @apply text-green-700 bg-green-300 hover:bg-brand-green-1;
 }
 
 </style>

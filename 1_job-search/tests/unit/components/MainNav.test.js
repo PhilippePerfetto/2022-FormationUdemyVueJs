@@ -11,10 +11,8 @@ describe("MainNav", () => {
   it("Display menu items for navigation", () => {
     const wrapper = mount(MainNav);
     const items = wrapper.findAll("[data-test='main-nav-list-item666']");
-    console.log(items);
     const texts = items.map((item) => item.text());
     expect(texts).toEqual(["Teams", "Sites", "Life@", "WeHire", "Std", "Jobs"]);
-    console.log(texts);
   });
   
   describe("When user is logged in", () => {

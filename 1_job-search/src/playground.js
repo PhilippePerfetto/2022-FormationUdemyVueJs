@@ -1,8 +1,18 @@
+const favFood = "sushi";
+
+const goodFoods = {
+  favFood: true,
+  [favFood]: true,
+};
+
+console.log(goodFoods);
+
+/*
 const numbers = [1, 2, 3, 4, 5];
 const squares = numbers.map((x) => x * x);
 
 console.log(squares);
-
+*/
 /*
 export const evenOrOdd = (number) => {
   if (number % 2 == 0) {
