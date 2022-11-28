@@ -24,7 +24,7 @@
       </div>
     </div>
     <hr class="line" />
-    <TheSubnav></TheSubnav>
+    <TheSubnav v-if="isLoggedIn"></TheSubnav>
   </div>
   <div class="flex w_full h-64 bg-gray-500"></div>
   <!--<div class="w_full border-b border-solid border-brand-gray-1">.</div>-->
