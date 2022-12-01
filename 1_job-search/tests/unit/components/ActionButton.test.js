@@ -1,26 +1,33 @@
-import { mount } from "@vue/test-utils";
+import { render, screen } from "@testing-library/vue";
 
-import ActionButton from "@/components/ActionButton";
+import ActionButton from "@/components/ActionButton.vue";
 
 describe("ActionButton", () => {
   it("renders text", () => {
-    const wrapper = mount(ActionButton, {
+    render(ActionButton, {
       props: {
-        text: "I'm so clickable",
+        text: "Click me",
+        type: "primary",
       },
     });
-    expect(wrapper.text()).toMatch("I'm so clickable");
+
+    const button = screen.getByRole("button", {
+      name: /click me/i,
+    });
+    expect(button).toBeInTheDocument();
   });
 
-  it("applies styles to BTN", () => {
-    const wrapper = mount(ActionButton, {
+  it("applies one of several styles to button", () => {
+    render(ActionButton, {
       props: {
-        text: "Zoumba",
-        type: "secondary",
+        text: "Click me",
+        type: "primary",
       },
     });
 
-    const btn = wrapper.find("button");
-    expect(btn.classes("secondary")).toBe(true);
+    const button = screen.getByRole("button", {
+      name: /click me/i,
+    });
+    expect(button).toHaveClass("primary");
   });
 });

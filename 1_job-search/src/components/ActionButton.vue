@@ -1,18 +1,23 @@
 <template>
-  <button :class="buttonClass">{{ text }}</button>
+  <button :class="buttonClass">
+    {{ text }}
+  </button>
 </template>
 
 <script>
 export default {
   name: "ActionButton",
   props: {
-    text: { type: String, required: true },
+    text: {
+      type: String,
+      required: true,
+    },
     type: {
       type: String,
       required: false,
       default: "primary",
       validator(value) {
-        return ["primary", "secondary", "terciary"].includes(value);
+        return ["primary", "secondary"].includes(value);
       },
     },
   },
@@ -20,9 +25,6 @@ export default {
     buttonClass() {
       return {
         [this.type]: true,
-        /*primary: this.type === "primary",
-        secondary : this.type === "secondary",
-        terciary : this.type === "terciary",*/
       };
     },
   },
@@ -35,13 +37,10 @@ button {
 }
 
 .primary {
-  @apply text-white bg-brand-blue-1 hover:shadow-blue;
+  @apply border-0 bg-brand-blue-1 text-white hover:shadow-blue;
 }
 
 .secondary {
-  @apply text-brand-blue-1 bg-transparent hover:bg-brand-blue-2;
-}
-.terciary {
-  @apply text-green-700 bg-green-300 hover:bg-brand-green-1;
+  @apply bg-transparent text-brand-blue-1 hover:bg-brand-blue-2 hover:text-white;
 }
 </style>

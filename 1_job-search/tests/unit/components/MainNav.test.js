@@ -1,52 +1,59 @@
-import { mount } from "@vue/test-utils";
+import { render, screen } from "@testing-library/vue";
+import userEvent from "@testing-library/user-event";
 
 import MainNav from "@/components/MainNav.vue";
 
 describe("MainNav", () => {
-  function renderMainNav() {
-    const wrapper = mount(MainNav, {
+  const renderMainNav = () => {
+    render(MainNav, {
       global: {
         stubs: {
           FontAwesomeIcon: true,
         },
       },
     });
-    return wrapper;
-  }
+  };
+
   it("displays company name", () => {
-    let wrapper = renderMainNav();
-    expect(wrapper.text()).toContain("Bobo carreers");
+    renderMainNav();
+    const companyName = screen.getByText("Bobo Careers");
+    expect(companyName).toBeInTheDocument();
   });
 
-  it("Display menu items for navigation", () => {
-    let wrapper = renderMainNav();
-    const items = wrapper.findAll("[data-test='main-nav-list-item666']");
-    const texts = items.map((item) => item.text());
-    expect(texts).toEqual(["Teams", "Sites", "Life@", "WeHire", "Std", "Jobs"]);
+  it("displays menu items for navigation", () => {
+    renderMainNav();
+    const navigationMenuItems = screen.getAllByRole("listitem");
+    const navigationMenuTexts = navigationMenuItems.map(
+      (item) => item.textContent
+    );
+    expect(navigationMenuTexts).toEqual([
+      "Teams",
+      "Locations",
+      "Life at Bobo Corp",
+      "How we hire",
+      "Students",
+      "Jobs",
+    ]);
   });
 
-  describe("When user is logged in", () => {
-    it("displays user profile", () => {
-      let wrapper = renderMainNav();
-      const loginBtn = wrapper.find("[data-test='login-button']");
-      expect(loginBtn.exists()).toBe(true);
-    });
-  });
+  describe("when the user logs in", () => {
+    it("displays user profile picture", async () => {
+      renderMainNav();
 
-  describe("When user is logged out", () => {
-    it("prompts user to sign in", async () => {
-      let wrapper = renderMainNav();
-      let profileImage = wrapper.find("[data-test='profile-image']");
-      expect(profileImage.exists()).toBe(false);
+      let profileImage = screen.queryByRole("img", {
+        name: /user profile image/i,
+      });
+      expect(profileImage).not.toBeInTheDocument();
 
-      let loginBtn = wrapper.find("[data-test='login-button']");
-      await loginBtn.trigger("click");
+      const loginButton = screen.getByRole("button", {
+        name: /sign in/i,
+      });
+      await userEvent.click(loginButton);
 
-      loginBtn = wrapper.find("[data-test='login-button']");
-      expect(loginBtn.exists()).toBe(false);
-
-      profileImage = wrapper.find("[data-test='profile-image']");
-      expect(profileImage.exists()).toBe(true);
+      profileImage = screen.getByRole("img", {
+        name: /user profile image/i,
+      });
+      expect(profileImage).toBeInTheDocument();
     });
   });
 });

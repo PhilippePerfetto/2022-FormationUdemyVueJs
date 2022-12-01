@@ -1,10 +1,9 @@
-import { mount, render, screen } from "@testing-library/vue";
+import { render, screen } from "@testing-library/vue";
 
 import TheSubnav from "@/components/TheSubnav.vue";
-import { faL } from "@fortawesome/free-solid-svg-icons";
 
 describe("TheSubnav", () => {
-  describe("When user is on jobs page", () => {
+  describe("when user is on jobs page", () => {
     it("displays job count", () => {
       render(TheSubnav, {
         global: {
@@ -19,13 +18,14 @@ describe("TheSubnav", () => {
         },
       });
 
-      const jobCount = screen.queryByText("1653");
-      expect(jobCount.textContent).toBe("1653");
+      const jobCount = screen.getByText("1653");
+
+      expect(jobCount).toBeInTheDocument();
     });
   });
 
-  describe("When user is NOT on jobs page", () => {
-    it("doest not display job count", () => {
+  describe("when user is not on jobs page", () => {
+    it("does NOT display job count", () => {
       render(TheSubnav, {
         global: {
           stubs: {
@@ -40,7 +40,8 @@ describe("TheSubnav", () => {
       });
 
       const jobCount = screen.queryByText("1653");
-      expect(jobCount).toBeNull();
+
+      expect(jobCount).not.toBeInTheDocument();
     });
   });
 });
