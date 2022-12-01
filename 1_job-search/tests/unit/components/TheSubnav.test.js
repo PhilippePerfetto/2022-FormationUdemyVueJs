@@ -7,6 +7,11 @@ describe("TheSubnav", () => {
   describe("When user is on jobs page", () => {
     it("displays job count", () => {
       render(TheSubnav, {
+        global: {
+          stubs: {
+            FontAwesomeIcon: true,
+          },
+        },
         data() {
           return {
             onJobResultsPage: true,
@@ -15,7 +20,6 @@ describe("TheSubnav", () => {
       });
 
       const jobCount = screen.queryByText("1653");
-      console.log(jobCount.textContent);
       expect(jobCount.textContent).toBe("1653");
     });
   });
@@ -23,6 +27,11 @@ describe("TheSubnav", () => {
   describe("When user is NOT on jobs page", () => {
     it("doest not display job count", () => {
       render(TheSubnav, {
+        global: {
+          stubs: {
+            FontAwesomeIcon: true,
+          },
+        },
         data() {
           return {
             onJobResultsPage: false,
