@@ -9,7 +9,7 @@
           <TheHeadline />
         </div>
         <div class="col-span-5 col-start-7 border border-blue-700">
-          5 columns
+          <TheHeadline />
         </div>
         <div class="col-span-1 col-start-12 border border-blue-700">
           1 column
