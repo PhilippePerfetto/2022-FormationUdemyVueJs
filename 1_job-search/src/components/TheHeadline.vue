@@ -1,15 +1,17 @@
 <template>
   <section>
-    <h1>
-      <span :class="actionClasses">{{ action }}</span
-      ><br />
+    <h1 class="mb-14 text-8xl font-bold tracking-tighter">
+      <span :class="actionClasses">{{ action }}</span>
+      <br />
       for everyone
     </h1>
-    <h2>Find your next job at Bobo Corp</h2>
+    <h2 class="text-3xl font-light">Find your next job at Bobo Corp</h2>
   </section>
 </template>
 
 <script>
+import nextElementInList from "@/utils/nextElementInList";
+
 export default {
   name: "TheHeadline",
   data() {
@@ -20,12 +22,7 @@ export default {
   },
   computed: {
     actionClasses() {
-      return {
-        build: this.action === "Build",
-        create: this.action === "Create",
-        design: this.action === "Design",
-        code: this.action === "Code",
-      };
+      return { [this.action.toLowerCase()]: true };
     },
   },
   created() {
@@ -38,9 +35,7 @@ export default {
     changeTitle() {
       this.interval = setInterval(() => {
         const actions = ["Build", "Create", "Design", "Code"];
-        const currentActionIndex = actions.indexOf(this.action);
-        const nextActionIndex = (currentActionIndex + 1) % 4;
-        this.action = actions[nextActionIndex];
+        this.action = nextElementInList(actions, this.action);
       }, 3000);
     },
   },
