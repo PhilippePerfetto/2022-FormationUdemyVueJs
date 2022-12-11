@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/vue";
 import { nextTick } from "Vue";
 
-import TheHeadline from "@/components/TheHeadline.vue";
+import TheHeadline from "@/components/JobSearch/TheHeadline.vue";
 import { vi } from "vitest";
 //import { clear } from "@testing-library/user-event/dist/types/utility";
 
