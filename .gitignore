@@ -103,5 +103,7 @@ dist
 # TernJS port file
 .tern-port
 
-# VS used for GIT :o)
+# VS used for GIT + VS projects :o)
 .vs/
+.bin/
+.obj/
