@@ -10,7 +10,6 @@ namespace WpfApp1.ViewModels
         [ObservableProperty]
         private bool signInButtonVisible = true;
 
-        [RelayCommand]
-        private void SignIn() => SignInButtonVisible = false;
+        public IRelayCommand? SignInCommand { get; internal set; }
     }
 }

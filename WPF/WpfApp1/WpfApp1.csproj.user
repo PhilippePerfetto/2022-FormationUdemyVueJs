@@ -7,10 +7,13 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="MainWindow.xaml">
+    <Page Update="Views\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Global.xaml">
+    <Page Update="Global.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Headline.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\SubNavigation.xaml">
