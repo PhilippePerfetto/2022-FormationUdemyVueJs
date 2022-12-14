@@ -5,7 +5,7 @@
       <br />
       for everyone
     </h1>
-    <h2 class="text-3xl font-light">Find your next job at Bobo Corp</h2>
+    <h2 class="text-3xl font-light">Find your next job at Bobo Corp.</h2>
   </section>
 </template>
 
@@ -22,7 +22,9 @@ export default {
   },
   computed: {
     actionClasses() {
-      return { [this.action.toLowerCase()]: true };
+      return {
+        [this.action.toLowerCase()]: true,
+      };
     },
   },
   created() {

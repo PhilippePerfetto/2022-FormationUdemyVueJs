@@ -1,8 +1,8 @@
 <template>
   <input
-    class="w-full text-lg font-normal focus:outline-none"
     type="text"
     :value="modelValue"
+    class="w-full text-lg font-normal focus:outline-none"
     @input="handleInput"
   />
 </template>
