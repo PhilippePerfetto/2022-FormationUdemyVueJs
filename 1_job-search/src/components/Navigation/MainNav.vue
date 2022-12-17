@@ -17,10 +17,10 @@
               :key="menuItem.text"
               class="ml-9 h-full first:ml-0"
             >
-              <RouterLink
+              <router-link
                 :to="menuItem.url"
                 class="flex h-full items-center py-2.5"
-                >{{ menuItem.text }}</RouterLink
+                >{{ menuItem.text }}</router-link
               >
             </li>
           </ul>

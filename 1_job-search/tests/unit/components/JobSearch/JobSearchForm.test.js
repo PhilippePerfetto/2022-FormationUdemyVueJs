@@ -2,7 +2,6 @@ import { render, screen } from "@testing-library/vue";
 import userEvent from "@testing-library/user-event";
 
 import JobSearchForm from "@/components/JobSearch/JobSearchForm.vue";
-import { vi } from "vitest";
 
 describe("JobSearchForm", () => {
   describe("when user submits form", () => {
@@ -13,7 +12,7 @@ describe("JobSearchForm", () => {
       render(JobSearchForm, {
         global: {
           mocks: {
-            $router: $router,
+            $router,
           },
           stubs: {
             FontAwesomeIcon: true,
@@ -24,17 +23,16 @@ describe("JobSearchForm", () => {
       const roleInput = screen.getByRole("textbox", {
         name: /role/i,
       });
-      await userEvent.type(roleInput), "Vue Developer";
+      await userEvent.type(roleInput, "Vue Developer");
 
       const locationInput = screen.getByRole("textbox", {
         name: /where?/i,
       });
-      await userEvent.type(locationInput), "Dallas";
+      await userEvent.type(locationInput, "Dallas");
 
       const submitButton = screen.getByRole("button", {
         name: /search/i,
       });
-
       await userEvent.click(submitButton);
 
       expect(push).toHaveBeenCalledWith({
