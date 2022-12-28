@@ -36,7 +36,7 @@ describe("JobListings", () => {
     expect(axios.get).toHaveBeenCalledWith("http://myfakeapi.com/jobs");
   });
 
-  it("creates a job listing for every job", async () => {
+  it("displays maximum of 10 jobs", async () => {
     axios.get.mockResolvedValue({ data: Array(15).fill({}) });
     const queryParams = { page: "1" };
     const $route = createRoute(queryParams);
@@ -55,8 +55,6 @@ describe("JobListings", () => {
       renderJobListings($route);
 
       expect(screen.getByText("Page 1")).toBeInTheDocument();
-      expect(screen.queryByText("Next") == undefined);
-      expect(screen.queryByText("Previous") == undefined);
     });
   });
 
@@ -68,8 +66,6 @@ describe("JobListings", () => {
       renderJobListings($route);
 
       expect(screen.getByText("Page 3")).toBeInTheDocument();
-      //expect(screen.getByText("Next")).toBeInTheDocument();
-      expect(screen.getByText("Previous")).toBeInTheDocument();
     });
   });
 
@@ -84,9 +80,6 @@ describe("JobListings", () => {
       await screen.findAllByRole("listitem");
       const previousLink = screen.queryByRole("link", { name: /previous/i });
       expect(previousLink).not.toBeInTheDocument();
-
-      expect(screen.queryByText("Previous") == undefined);
-      expect(screen.queryByText("Next") != undefined);
     });
 
     it("shows link to next page", async () => {
@@ -99,20 +92,32 @@ describe("JobListings", () => {
       await screen.findAllByRole("listitem");
       const nextLink = screen.queryByRole("link", { name: /next/i });
       expect(nextLink).toBeInTheDocument();
-
-      expect(screen.queryByText("Previous") == undefined);
-      expect(screen.queryByText("Next") != undefined);
     });
   });
 
-  describe("when params is over page number", () => {
-    it("displays page number 100", () => {
-      const queryParams = { page: "100" };
+  describe("when user is on last page", () => {
+    it("does not show link to next page", async () => {
+      axios.get.mockResolvedValue({ data: Array(15).fill({}) });
+      const queryParams = { page: "2" };
       const $route = createRoute(queryParams);
 
       renderJobListings($route);
 
-      expect(screen.queryByText("Next") == undefined);
+      await screen.findAllByRole("listitem");
+      const nextLink = screen.queryByRole("link", { name: /next/i });
+      expect(nextLink).not.toBeInTheDocument();
+    });
+
+    it("shows link to previous page", async () => {
+      axios.get.mockResolvedValue({ data: Array(15).fill({}) });
+      const queryParams = { page: "2" };
+      const $route = createRoute(queryParams);
+
+      renderJobListings($route);
+
+      await screen.findAllByRole("listitem");
+      const previousLink = screen.queryByRole("link", { name: /previous/i });
+      expect(previousLink).toBeInTheDocument();
     });
   });
 });

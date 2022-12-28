@@ -14,15 +14,18 @@
             role="link"
             :to="{ name: 'JobResults', query: { page: previousPage } }"
             class="mx-3 text-sm font-semibold text-brand-blue-1"
-            >Previous</router-link
           >
+            Previous
+          </router-link>
+
           <router-link
             v-if="nextPage"
             role="link"
             :to="{ name: 'JobResults', query: { page: nextPage } }"
             class="mx-3 text-sm font-semibold text-brand-blue-1"
-            >Next</router-link
           >
+            Next
+          </router-link>
         </div>
       </div>
     </div>
@@ -47,12 +50,14 @@ export default {
       return Number.parseInt(this.$route.query.page || "1");
     },
     previousPage() {
-      const prev = this.currentPage - 1;
-      return prev < 1 ? undefined : prev;
+      const previousPage = this.currentPage - 1;
+      const firstPage = 1;
+      return previousPage >= firstPage ? previousPage : undefined;
     },
     nextPage() {
-      const next = this.currentPage + 1;
-      return next > Math.ceil(this.jobs.length / 10) ? undefined : next;
+      const nextPage = this.currentPage + 1;
+      const maxPage = Math.ceil(this.jobs.length / 10);
+      return nextPage <= maxPage ? nextPage : undefined;
     },
     displayedJobs() {
       const pageNumber = this.currentPage;
