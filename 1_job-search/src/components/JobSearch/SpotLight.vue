@@ -5,8 +5,7 @@
         :img="spotlight.img"
         :title="spotlight.title"
         :description="spotlight.description"
-      >
-      </slot>
+      ></slot>
     </li>
   </ul>
 </template>
