@@ -12,7 +12,7 @@ describe("state", () => {
     expect(store.isLoggedIn).toBe(false);
   });
 
-  it("stores organizations that the user would like to filter jobs on", () => {
+  it("stores organizations that the user would like to filter jobs by", () => {
     const store = useUserStore();
     expect(store.selectedOrganizations).toEqual([]);
   });
@@ -32,7 +32,7 @@ describe("actions", () => {
   });
 
   describe("ADD_SELECTED_ORGANIZATIONS", () => {
-    it("it updates the organizations the user has choosen to filter jobs by", () => {
+    it("updates organizations the user has chosen to filter jobs by", () => {
       const store = useUserStore();
       store.ADD_SELECTED_ORGANIZATIONS(["Org1", "Org2"]);
       expect(store.selectedOrganizations).toEqual(["Org1", "Org2"]);
