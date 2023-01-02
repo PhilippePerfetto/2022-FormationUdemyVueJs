@@ -23,6 +23,7 @@ const props = defineProps({
 });
 
 const { type } = toRefs(props);
+
 const buttonClass = computed(() => {
   return {
     [type.value]: true,

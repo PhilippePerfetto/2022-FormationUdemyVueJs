@@ -1,9 +1,9 @@
-const { ref, computed } = require("vue");
+const { toRefs, reactive } = require("vue");
 
-const name = ref("Boris");
-const title = computed(() => name.value + " the great");
-console.log(title.value);
+const person = {
+  firstName: "Boris",
+  lastName: "Paskhaver",
+};
 
-name.value = "Peter";
-
-console.log(title.value);
+const refPerson = toRefs(reactive(person));
+console.log(refPerson);
