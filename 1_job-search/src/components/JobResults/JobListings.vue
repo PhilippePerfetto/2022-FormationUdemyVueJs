@@ -35,35 +35,30 @@
 <script setup>
 import { computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
-import { mapActions, mapState } from "pinia";
 
 import JobListing from "@/components/JobResults/JobListing.vue";
-import { useJobsStore, FETCH_JOBS } from "@/stores/jobs";
+import { useJobsStore } from "@/stores/jobs";
+
+import usePreviousAndNextPages from "@/composables/usePreviousAndNextPages";
 
 const jobsStore = useJobsStore();
 onMounted(jobsStore.FETCH_JOBS);
 
-const route = useRoute();
-const currentPage = computed(() => Number.parseInt(route.query.page || "1"));
-
-const previousPage = computed(() => {
-  const previousPage = currentPage.value - 1;
-  const firstPage = 1;
-  return previousPage >= firstPage ? previousPage : undefined;
-});
-
-const nextPage = computed(() => {
-  const nextPage = currentPage.value + 1;
-  const maxPage = Math.ceil(FILTERED_JOBS.value.length / 10);
-  return nextPage <= maxPage ? nextPage : undefined;
-});
-
 const FILTERED_JOBS = computed(() => jobsStore.FILTERED_JOBS);
 
+const route = useRoute();
+const currentPage = computed(() => Number.parseInt(route.query.page || "1"));
+const maxPage = computed(() => Math.ceil(FILTERED_JOBS.value.length / 10));
+
+const { previousPage, nextPage } = usePreviousAndNextPages(
+  currentPage,
+  maxPage
+);
+
 const displayedJobs = computed(() => {
-  const pageNumber = currentPage;
-  const firstJobIndex = (pageNumber.value - 1) * 10;
-  const lastJobIndex = pageNumber.value * 10;
+  const pageNumber = currentPage.value;
+  const firstJobIndex = (pageNumber - 1) * 10;
+  const lastJobIndex = pageNumber * 10;
   return FILTERED_JOBS.value.slice(firstJobIndex, lastJobIndex);
 });
 </script>
