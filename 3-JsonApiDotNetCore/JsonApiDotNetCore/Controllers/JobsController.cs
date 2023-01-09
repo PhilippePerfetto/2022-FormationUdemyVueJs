@@ -10,16 +10,10 @@ namespace JsonApiDotNetCore.Controllers
     {
         private readonly DbModel model;
 
-        private readonly ILogger<JobsController> _logger;
-
-        public JobsController(ILogger<JobsController> logger)
+        public JobsController()
         {
-            _logger = logger;
-
             var json = System.IO.File.ReadAllText("db.json");
-            var jsonModel = JsonSerializer.Deserialize<DbModel>(json);
-
-            model = jsonModel ?? new DbModel();
+            model = JsonSerializer.Deserialize<DbModel>(json);
         }
 
         [HttpGet(Name = "Jobs")]
