@@ -13,7 +13,11 @@ namespace JsonApiDotNetCore.Controllers
         public JobsController()
         {
             var json = System.IO.File.ReadAllText("db.json");
-            model = JsonSerializer.Deserialize<DbModel>(json);
+            var jsonModel = JsonSerializer.Deserialize<DbModel>(json);
+            if (jsonModel == null)
+                throw new ArgumentNullException($"Failed to load the JSON model");
+
+            model = jsonModel;
         }
 
         [HttpGet(Name = "Jobs")]
@@ -22,11 +26,13 @@ namespace JsonApiDotNetCore.Controllers
         [HttpGet(Name = "GetJob")]
         public Job GetJob([FromQuery] int id) => model.jobs.First(x => x.id == id);
 
+
         [HttpGet(Name = "degrees")]
         public IEnumerable<Degree> Degrees() => model.degrees.ToList();
 
         [HttpGet(Name = "GetDegree")]
         public Degree GetDegree([FromQuery] int id) => model.degrees.First(x => x.id == id);
+
 
         [HttpGet(Name = "spotlights")]
         public IEnumerable<Spotlight> Spotlights() => model.spotlights.ToList();

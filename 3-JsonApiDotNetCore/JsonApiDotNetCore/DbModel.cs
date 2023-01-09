@@ -1,5 +1,4 @@
-﻿
-namespace JsonApiDotNetCore
+﻿namespace JsonApiDotNetCore
 {
 #pragma warning disable IDE1006 // Styles d'affectation de noms
     public record DbModel(Degree[] degrees, Spotlight[] spotlights, Job[] jobs);
